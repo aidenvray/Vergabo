@@ -44,11 +44,13 @@ if(empty($cfg['tiny']['timezone']))
 date_default_timezone_set($cfg['tiny']['timezone']);
 if(empty($cfg['zf']['root']))
 	$cfg['zf']['root'] = '';
-define('ZF_ROOT',$cfg['zf']['root']);
+# Define ZF_ROOT correctly
+if (!isset($cfg['zf']['root']) || empty($cfg['zf']['root'])) {
+    $cfg['zf']['root'] = dirname(__FILE__) . '/../zf/';
+}
 
-# Fix ZF_ROOT path if empty or invalid
-if (ZF_ROOT === '' || !is_dir(ZF_ROOT)) {
-    define('ZF_ROOT', dirname(__FILE__) . '/../zf/');
+if (!defined('ZF_ROOT')) {
+    define('ZF_ROOT', rtrim($cfg['zf']['root'], '/') . '/');
 }
 
 ## ZCT FRAMEWORK!! ##

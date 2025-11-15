@@ -42,16 +42,13 @@ if(!empty($cfg['tiny']['session']))
 if(empty($cfg['tiny']['timezone']))
 	$cfg['tiny']['timezone'] = 'UTC';
 date_default_timezone_set($cfg['tiny']['timezone']);
-if(empty($cfg['zf']['root']))
-	$cfg['zf']['root'] = '';
-# Define ZF_ROOT correctly
-if (!isset($cfg['zf']['root']) || empty($cfg['zf']['root'])) {
+# FIX ZF_ROOT once and for all
+if (empty($cfg['zf']['root'])) {
     $cfg['zf']['root'] = dirname(__FILE__) . '/../zf/';
 }
 
-if (!defined('ZF_ROOT')) {
-    define('ZF_ROOT', rtrim($cfg['zf']['root'], '/') . '/');
-}
+define('ZF_ROOT', rtrim($cfg['zf']['root'], '/') . '/');
+
 
 ## ZCT FRAMEWORK!! ##
 require_once ZF_ROOT.'zwei.class.php'; # ZWEI is REQUIRED by tinyScript core

@@ -46,6 +46,11 @@ if(empty($cfg['zf']['root']))
 	$cfg['zf']['root'] = '';
 define('ZF_ROOT',$cfg['zf']['root']);
 
+# Fix ZF_ROOT path if empty or invalid
+if (ZF_ROOT === '' || !is_dir(ZF_ROOT)) {
+    define('ZF_ROOT', dirname(__FILE__) . '/../zf/');
+}
+
 ## ZCT FRAMEWORK!! ##
 require_once ZF_ROOT.'zwei.class.php'; # ZWEI is REQUIRED by tinyScript core
 if(!class_exists('ZWEI'))
